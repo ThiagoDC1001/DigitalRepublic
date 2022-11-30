@@ -18,18 +18,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      password: {
+        type: Sequelize.STRING(60),
+        allowNull: false,
+        defaultValue: "lala",
+      },
       accountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
+      },      
     })
   },
 

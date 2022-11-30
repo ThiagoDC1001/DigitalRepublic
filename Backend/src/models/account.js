@@ -8,8 +8,8 @@ const AccountModel = (sequelize, DataTypes) => {
   }
 
   Account.associate = (models) => {
-    Account.hasMany(models.Transaction, {as: 'transactionDebited', foreignKey: 'debitedAccountId'});
-    Account.hasMany(models.Transaction, {as: 'transactionCredited', foreignKey: 'creditedAccountId'});
+    Account.hasMany(models.Transaction, {foreignKey: 'debitedAccountId', as: 'debited'});
+    Account.hasMany(models.Transaction, {foreignKey: 'creditedAccountId', as: 'credited'});
   }
 
   return Account;

@@ -4,7 +4,7 @@ module.exports = {
       balance: 1000,
     },
     {      
-      balance: 3500,
+      balance: 1000,
     },
   ])
   },

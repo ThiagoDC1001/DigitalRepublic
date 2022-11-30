@@ -6,8 +6,8 @@ const TransactionModel = (sequelize, DataTypes) => {
   });
 
   Transaction.associate = (models) => {
-    Transaction.belongsTo(models.Account, {as: 'accountDebited', foreignKey: 'debitedAccountId'});
-    Transaction.belongsTo(models.Account, {as: 'accountCredited', foreignKey: 'creditedAccountId'});
+    Transaction.belongsTo(models.Account, {as: 'debited', foreignKey: 'debitedAccountId'});
+    Transaction.belongsTo(models.Account, {as: 'credited', foreignKey: 'creditedAccountId'});
   }
 
   return Transaction;

@@ -13,6 +13,7 @@ module.exports = {
       value: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
+        defaultValue: 100,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -25,10 +26,20 @@ module.exports = {
       creditedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 999,
+        references: {
+          model: 'Accounts',
+          key: 'id',
+        }
       },
       debitedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 999,
+        references: {
+          model: 'Accounts',
+          key: 'id',
+        }
       },
     })
   },
