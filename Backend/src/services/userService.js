@@ -1,14 +1,13 @@
 const models = require('../models');
 // const Account = require('../models');
 
-const INITIAL_VALUE_BALANCE = 100;
+const INITIAL_VALUE_BALANCE = 4000;
 
 const userService = {
-  async createUser(name, cpf) {
-    const balance = INITIAL_VALUE_BALANCE;
-    const account = await models.Account.create({ balance });
-    const userUser = await models.User.create({ accountId: account.id, name, cpf });
-    return userUser;
+
+  async findOne(id) {
+    const user = await models.User.findOne(id)    
+    return user;
   },
 
   async getAll() {
@@ -18,6 +17,7 @@ const userService = {
     const allUsers = users.map((e) => e.dataValues);
     return allUsers;
   }
+
 }
 
 module.exports = userService;

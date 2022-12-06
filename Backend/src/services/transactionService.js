@@ -2,40 +2,35 @@ const models = require('../models');
 
 const transactionService = {
   
-  async createTransaction(data) {    
+  async makeTransaction(data) {     
+    const debitedAccountId = await models.User.findOne({ where: { cpf: data.debitedCpf }})     
+    const creditedAccountId = await models.User.findOne({ where: { cpf: data.creditedCpf }})   
+    
+      const bolinha = this.calculating(debitedAccountId, creditedAccountId, data.transferValue);
+      this.createTransaction(debitedAccountId, creditedAccountId, data.transferValue);      
+      return bolinha;
+    
+  },
+  
+  async calculating(debitedAccountId, creditedAccountId, value) {    
+      const debited = await models.Account.findOne({ where: { id: debitedAccountId.accountId } })    
+      const credited = await models.Account.findOne({ where: { id: creditedAccountId.accountId } })    
+      if(Number(debited.balance) < Number(value))  return false;   
+      const balanceDebited = Number(debited.balance) - Number(value);
+      const balanceCredited = Number(credited.balance) + Number(value);
+      debited.update({ balance: balanceDebited });
+      credited.update({ balance: balanceCredited });
+      return true;    
+  },
+  
+
+  async createTransaction(debitedAccountId, creditedAccountId, transferValue) {       
     const { dataValues } = await models.Transaction.create({
-      debitedAccountId: `${data.debitedAccountId}`,
-      creditedAccountId: `${data.creditedAccountId}`,
-      value: `${data.value}`
+      debitedAccountId: `${debitedAccountId.accountId}`,
+      creditedAccountId: `${creditedAccountId.accountId}`,
+      value: `${transferValue}`
     })    
     return dataValues;
-  },
-  
-  async debitando(id, value) {
-    const result = await models.Account.findOne({
-      where: { id }   
-    })    
-    const balanceDebited = Number(result.balance) - Number(value);
-    result.update({ balance: balanceDebited })
-    return balanceDebited;
-  },
-  
-  async creditando(id, value) {
-    const result = await models.Account.findOne({
-      where: { id }   
-    });
-    const balanceCredited = Number(result.balance) + Number(value);
-    result.update({ balance: balanceCredited })
-    return balanceCredited;
-  },
-  
-  async makeTransaction(data) { 
-    // validacoes
-    const create = await this.createTransaction(data);
-    const debito = await this.debitando(create.debitedAccountId, create.value)
-    const credito = await this.creditando(create.creditedAccountId, create.value)
-    console.log(debito, credito)
-    return;
   },
 
   

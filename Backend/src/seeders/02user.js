@@ -1,14 +1,14 @@
 module.exports = {
   up: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkInsert('Users', [{      
-      name: 'Rafinha dos Santos',
-      cpf: '487.501.680-88',
-      password: 'pedrinha',
+      name: 'Erika',
+      cpf: '831.054.330-15',
+      password: 'a4c986868837d86d7f24f5d2d278c49e',
       accountId: 1,
     }, {      
-      name: 'Lucca da Silva Sauro',
-      cpf: '824.166.110-03',
-      password: 'bolinha',
+      name: 'Thiago',
+      cpf: '317.255.752-99',
+      password: '98ba5150709f5d78212cd07d234cfb98',
       accountId: 2,
     }])
   },

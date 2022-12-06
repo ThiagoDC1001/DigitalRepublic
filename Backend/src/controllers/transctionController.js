@@ -1,22 +1,17 @@
 const transactionService = require('../services/transactionService');
 
 const transactionController = {
-  async makeTransaction(req, res) {
-    const data = req.body;
-    await transactionService.makeTransaction(data)
-    res.status(200).json({message: 'Transaction Successful' })
-  },
-
-  async createTransaction(req, res) {
+  async makeTransaction(req, res) {    
     const data = req.body;    
-    await transactionService.createTransaction(data);
-    res.status(201).json({ message: 'Transaction Successful' })
-  },
+      const bolinha = await transactionService.makeTransaction(data)
+      if(bolinha) {
+        res.status(200).json({message: 'Transação efetuada com sucesso' })
+      } else {res.status(404).json({message: 'Saldo insuficiente'})}
+    },  
 
   async transData (req, res) {
     const { id }  = req.params;
-    const result = transactionService.transData(id);
-    console.log(result)
+    const result = transactionService.transData(id);    
     res.status(200).json(result)
   },
 
