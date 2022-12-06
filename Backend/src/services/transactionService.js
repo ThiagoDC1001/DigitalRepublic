@@ -40,6 +40,11 @@ const transactionService = {
     );
     const allTrans = all.map((e) => e.dataValues);
     return allTrans;
+  },
+
+  async findById(id) {
+    const { dataValues } = await models.Transaction.findOne({ where: { id}})    
+    return dataValues;
   }
 };
 

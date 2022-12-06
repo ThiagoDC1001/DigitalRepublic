@@ -9,9 +9,10 @@ const transactionController = {
       } else {res.status(404).json({message: 'Saldo insuficiente'})}
     },  
 
-  async transData (req, res) {
+  async findById (req, res) {
     const { id }  = req.params;
-    const result = transactionService.transData(id);    
+    const result = await transactionService.findById(id);
+    console.log(result)    
     res.status(200).json(result)
   },
 
